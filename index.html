@@ -1,0 +1,441 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101b2b">
+  <meta name="description" content="Discover homes and apartments for sale and rent in Lagos, Nigeria. Contact Mobile Homes and Apartments to arrange a property inspection.">
+  <title>Mobile Homes & Apartments | Lagos Real Estate</title>
+  <style>
+    :root {
+      --navy: #101b2b;
+      --gold: #d9b879;
+      --cream: #f7f5f0;
+      --white: #ffffff;
+      --muted: #657080;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--navy);
+      background: var(--cream);
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    button, input, select, textarea { font: inherit; }
+    .container { width: min(1120px, 90%); margin: auto; }
+    header {
+      background: var(--navy);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid #344154;
+    }
+    nav {
+      min-height: 78px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-icon {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 9px;
+      border-radius: 8px;
+      font-size: 22px;
+    }
+    .brand-name { font-weight: 800; line-height: 1.2; }
+    .brand-name small {
+      display: block;
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 2px;
+      margin-top: 5px;
+    }
+    .nav-links { display: flex; align-items: center; gap: 25px; font-size: 14px; }
+    .nav-links a:hover { color: var(--gold); }
+    .btn {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      padding: 13px 19px;
+      border-radius: 5px;
+      border: 1px solid var(--gold);
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: white; border-color: #8792a1; }
+    .hero {
+      background: var(--navy);
+      color: white;
+      padding: 65px 0 75px;
+    }
+    .eyebrow {
+      color: var(--gold);
+      letter-spacing: 3px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-size: clamp(38px, 6vw, 70px);
+      line-height: 1.08;
+      max-width: 760px;
+      margin: 20px 0;
+      letter-spacing: -2px;
+    }
+    .hero p { color: #d2d8e1; max-width: 580px; margin-bottom: 27px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-image {
+      margin-top: 42px;
+      height: 340px;
+      border-radius: 12px;
+      background:
+        linear-gradient(90deg, rgba(16,27,43,.1), rgba(16,27,43,.05)),
+        url("https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1800&q=85") center 55%/cover;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      padding: 27px 0;
+      border-bottom: 1px solid #ddd8cd;
+    }
+    .stat { padding: 10px; }
+    .stat strong { display: block; font-size: 23px; }
+    .stat span { color: var(--muted); font-size: 13px; }
+    section { padding: 75px 0; scroll-margin-top: 80px; }
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .section-heading h2 { font-size: clamp(28px, 4vw, 42px); line-height: 1.2; }
+    .section-heading p { color: var(--muted); margin-top: 8px; }
+    .property-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .property-card {
+      background: white;
+      border: 1px solid #e8e3da;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform .2s;
+    }
+    .property-card:hover { transform: translateY(-4px); }
+    .property-image {
+      height: 215px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .tag {
+      position: absolute;
+      top: 13px;
+      left: 13px;
+      background: var(--gold);
+      color: var(--navy);
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 800;
+      border-radius: 4px;
+    }
+    .property-info { padding: 20px; }
+    .property-info h3 { font-size: 19px; margin-bottom: 6px; }
+    .location { color: var(--muted); font-size: 13px; }
+    .price { font-size: 20px; font-weight: 800; margin: 15px 0; }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      border-top: 1px solid #eee;
+      padding-top: 13px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .property-info .btn { width: 100%; text-align: center; margin-top: 17px; }
+    .note { color: var(--muted); font-size: 12px; margin-top: 20px; }
+    .services { background: white; }
+    .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .service-card {
+      padding: 25px;
+      border: 1px solid #e8e3da;
+      border-radius: 9px;
+    }
+    .service-number { color: #aa8649; font-size: 13px; font-weight: 800; }
+    .service-card h3 { margin: 12px 0 8px; }
+    .service-card p { color: var(--muted); font-size: 14px; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 45px;
+      align-items: center;
+    }
+    .about-image {
+      min-height: 340px;
+      border-radius: 10px;
+      background: url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=85") center/cover;
+    }
+    .about-copy h2 { font-size: clamp(30px, 4vw, 43px); line-height: 1.2; margin: 12px 0 18px; }
+    .about-copy p { color: var(--muted); margin-bottom: 17px; }
+    .contact { background: var(--navy); color: white; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 45px; }
+    .contact h2 { font-size: clamp(30px, 4vw, 43px); line-height: 1.2; margin: 12px 0 16px; }
+    .contact-copy p { color: #d2d8e1; margin-bottom: 20px; }
+    .contact-details { color: #d2d8e1; font-size: 14px; margin-top: 20px; }
+    .booking-form {
+      background: white;
+      color: var(--navy);
+      border-radius: 10px;
+      padding: 25px;
+    }
+    .booking-form h3 { margin-bottom: 16px; font-size: 23px; }
+    .field { margin-bottom: 14px; }
+    .field label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 5px; }
+    .field input, .field select, .field textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d9dce1;
+      border-radius: 5px;
+      background: white;
+      color: var(--navy);
+    }
+    .field textarea { min-height: 85px; resize: vertical; }
+    .booking-form .btn { width: 100%; }
+    footer { background: #0a1220; color: #d2d8e1; padding: 28px 0; font-size: 13px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+    .whatsapp {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 20;
+      border-radius: 50px;
+      background: #20c56b;
+      color: white;
+      padding: 14px 19px;
+      font-weight: 700;
+      box-shadow: 0 4px 18px #0003;
+    }
+    @media(max-width: 800px) {
+      .nav-links { gap: 12px; }
+      .nav-links .optional { display: none; }
+      .property-grid, .service-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 28px; }
+      .hero-image { height: 270px; }
+    }
+    @media(max-width: 520px) {
+      nav { min-height: 70px; }
+      .brand-name { font-size: 13px; }
+      .brand-name small { font-size: 9px; }
+      .nav-links { gap: 10px; font-size: 12px; }
+      .nav-links .optional { display: none; }
+      .property-grid, .service-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 48px; }
+      .hero-image { height: 220px; }
+      .stats { gap: 3px; }
+      .stat strong { font-size: 17px; }
+      .stat span { font-size: 11px; }
+      section { padding: 55px 0; }
+      .section-heading { align-items: start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="#home" class="brand">
+        <span class="brand-icon">⌂</span>
+        <span class="brand-name">MOBILE HOMES<small>AND APARTMENTS</small></span>
+      </a>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#properties">Properties</a>
+        <a href="#about" class="optional">About</a>
+        <a href="#contact" class="btn">Book Inspection</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero" id="home">
+      <div class="container">
+        <div class="eyebrow">REAL ESTATE · LAGOS, NIGERIA</div>
+        <h1>Find a place<br>to call <span style="color:var(--gold)">home.</span></h1>
+        <p>Discover homes and apartments for sale and rent across Lagos. Let's help you find a property that fits your lifestyle and budget.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#properties">Explore Properties ↗</a>
+          <a class="btn btn-outline" href="#contact">Book an Inspection</a>
+        </div>
+        <div class="hero-image" role="img" aria-label="Modern residential property"></div>
+        <div class="stats">
+          <div class="stat"><strong>For Sale</strong><span>Find your next home</span></div>
+          <div class="stat"><strong>For Rent</strong><span>Discover available spaces</span></div>
+          <div class="stat"><strong>Lagos</strong><span>Local property assistance</span></div>
+        </div>
+      </div>
+    </div>
+
+    <section id="properties">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">EXPLORE OUR LISTINGS</div>
+            <h2>Featured properties.</h2>
+            <p>Find a property that feels right for you.</p>
+          </div>
+          <a class="btn" href="#contact">Find a Property ↗</a>
+        </div>
+        <div class="property-grid">
+          <article class="property-card">
+            <div class="property-image" style="background-image:url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80')"><span class="tag">FOR SALE</span></div>
+            <div class="property-info">
+              <h3>Modern Family Home</h3>
+              <p class="location">📍 Lagos, Nigeria</p>
+              <p class="price">Price on request</p>
+              <div class="features"><span>🏠 Family home</span><span>✨ Modern finish</span></div>
+              <a class="btn" href="#contact">Enquire About Property</a>
+            </div>
+          </article>
+          <article class="property-card">
+            <div class="property-image" style="background-image:url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80')"><span class="tag">FOR RENT</span></div>
+            <div class="property-info">
+              <h3>Contemporary Apartment</h3>
+              <p class="location">📍 Lagos, Nigeria</p>
+              <p class="price">Rent on request</p>
+              <div class="features"><span>🛋️ Stylish interior</span><span>🔑 Inspection available</span></div>
+              <a class="btn" href="#contact">Enquire About Property</a>
+            </div>
+          </article>
+          <article class="property-card">
+            <div class="property-image" style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80')"><span class="tag">FOR RENT</span></div>
+            <div class="property-info">
+              <h3>Premium Living Space</h3>
+              <p class="location">📍 Lagos, Nigeria</p>
+              <p class="price">Rent on request</p>
+              <div class="features"><span>🏡 Comfortable living</span><span>📅 Book a viewing</span></div>
+              <a class="btn" href="#contact">Enquire About Property</a>
+            </div>
+          </article>
+        </div>
+        <p class="note">These are demonstration listings. Replace their details with your actual available properties before publishing the website to customers.</p>
+      </div>
+    </section>
+
+    <section class="services">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">WHAT WE DO</div>
+            <h2>Property made simpler.</h2>
+            <p>Support for your next property move.</p>
+          </div>
+        </div>
+        <div class="service-grid">
+          <article class="service-card"><span class="service-number">01 / SALES</span><h3>Buy a Property</h3><p>Explore properties for sale and arrange a viewing to learn more.</p></article>
+          <article class="service-card"><span class="service-number">02 / RENTALS</span><h3>Rent a Home</h3><p>Discover rental options and find a space that suits your needs.</p></article>
+          <article class="service-card"><span class="service-number">03 / VIEWINGS</span><h3>Book an Inspection</h3><p>Tell us which property interests you and request a convenient viewing time.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container about-grid">
+        <div class="about-image" role="img" aria-label="Modern residential interior"></div>
+        <div class="about-copy">
+          <div class="eyebrow">ABOUT OUR BUSINESS</div>
+          <h2>Your next chapter starts with the right property.</h2>
+          <p>Mobile Homes and Apartments helps people explore property opportunities in Lagos, Nigeria, whether they are looking to buy or rent.</p>
+          <p>Our goal is to make discovering properties and arranging inspections straightforward and convenient.</p>
+          <a class="btn" href="#contact">Talk to Our Team ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-copy">
+          <div class="eyebrow">LET'S FIND YOUR PROPERTY</div>
+          <h2>Ready to arrange a viewing?</h2>
+          <p>Tell us what you're looking for. Send an inspection request and we'll help you take the next step.</p>
+          <a class="btn" href="#booking">Request an Inspection ↗</a>
+          <div class="contact-details">
+            <p>📍 Serving Lagos, Nigeria</p>
+            <p>🏠 Properties for sale and rent</p>
+            <p>📅 Inspection requests welcome</p>
+          </div>
+        </div>
+        <form class="booking-form" id="booking">
+          <h3>Book a property inspection</h3>
+          <div class="field"><label for="customer">Your full name</label><input id="customer" name="customer" required placeholder="Enter your name"></div>
+          <div class="field"><label for="phone">Phone / WhatsApp number</label><input id="phone" name="phone" required type="tel" placeholder="+234..."></div>
+          <div class="field"><label for="interest">I'm interested in</label><select id="interest" name="interest"><option>Property for rent</option><option>Property for sale</option><option>Either sale or rent</option></select></div>
+          <div class="field"><label for="property">Property or preferred location</label><input id="property" name="property" required placeholder="e.g. Lekki, Ikeja, Ajah"></div>
+          <div class="field"><label for="date">Preferred inspection date</label><input id="date" name="date" type="date" required></div>
+          <div class="field"><label for="message">Additional details (optional)</label><textarea id="message" name="message" placeholder="Budget, number of bedrooms, preferred time..."></textarea></div>
+          <button class="btn" type="submit">Send Inspection Request ↗</button>
+          <p class="note">This demo form needs a booking service or WhatsApp setup before it can deliver requests.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Mobile Homes and Apartments</span>
+      <span>For Sale & Rent · Lagos, Nigeria</span>
+    </div>
+  </footer>
+
+  <a class="whatsapp" id="whatsapp" href="#contact" aria-label="Contact us on WhatsApp">WhatsApp Us ↗</a>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Replace this with your WhatsApp number in international format.
+    // Example: 2348012345678 (digits only, no + or spaces).
+    const WHATSAPP_NUMBER = "";
+
+    const whatsappLink = document.getElementById("whatsapp");
+    const bookingForm = document.getElementById("booking");
+
+    if (WHATSAPP_NUMBER) {
+      whatsappLink.href = "https://wa.me/" + WHATSAPP_NUMBER;
+      whatsappLink.target = "_blank";
+      whatsappLink.rel = "noopener noreferrer";
+    }
+
+    bookingForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      if (!WHATSAPP_NUMBER) {
+        alert("Your inspection form is ready, but the business WhatsApp number has not been added yet. Contact the website owner to complete setup.");
+        return;
+      }
+
+      const data = new FormData(bookingForm);
+      const message = [
+        "Hello, I would like to book a property inspection.",
+        "Name: " + data.get("customer"),
+        "Phone: " + data.get("phone"),
+        "Interest: " + data.get("interest"),
+        "Property/location: " + data.get("property"),
+        "Preferred date: " + data.get("date"),
+        "Additional details: " + (data.get("message") || "None")
+      ].join("\n");
+
+      window.open(
+        "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message),
+        "_blank",
+        "noopener,noreferrer"
+      );
+    });
+  </script>
+</body>
+</html>
